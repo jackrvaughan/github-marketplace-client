@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { GithubService } from '../services/github.service';
+
 @Component({
   selector: 'app-marketplace',
   templateUrl: './marketplace.component.html',
@@ -7,9 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MarketplaceComponent implements OnInit {
 
-  constructor() { }
+  constructor(private githubService: GithubService) { }
 
   ngOnInit() {
+    this.githubService.getUser();
   }
 
 }

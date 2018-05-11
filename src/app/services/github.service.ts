@@ -4,22 +4,25 @@ import gql from 'graphql-tag';
 
 import { Subscription } from 'rxjs';
 
-// const CurrentUserForProfile = gql`
-//   query {
-//     viewer {
-//       login
-//     }
-//   }
-// `;
+const CurrentUserForProfile = gql`
+  query {
+    viewer {
+      login
+    }
+  }
+`;
 
 @Injectable({
   providedIn: 'root'
 })
 export class GithubService {
 
-  // private querySubscription: Subscription;
+  private querySubscription: Subscription;
 
-  constructor(apollo: Apollo) {
-    // apollo.query({query: gql`{ hello }`}).subscribe(console.log);
+  constructor(private apollo: Apollo) {}
+
+  getUser() {
+    console.log('requesting...');
+    this.apollo.query({query: CurrentUserForProfile}).subscribe(console.log);
   }
 }

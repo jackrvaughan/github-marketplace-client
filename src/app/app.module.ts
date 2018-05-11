@@ -16,6 +16,7 @@ import { NavComponent } from './shared/nav/nav.component';
 import { MarketplaceComponent } from './marketplace/marketplace.component';
 
 // services
+import { GithubService } from './services/github.service';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -41,14 +42,15 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     RouterModule.forRoot(
-      appRoutes,
-      { enableTracing: true } // <-- debugging purposes only
+      appRoutes
     ),
     HttpClientModule, // provides HttpClient for HttpLink
     ApolloModule,
     HttpLinkModule
   ],
-  providers: [],
+  providers: [
+    GithubService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
@@ -68,7 +70,10 @@ export class AppModule {
         return {};
       } else {
         return {
-          headers: headers.append('Authorization', `Bearer ${token}`)
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+          // headers: headers.append('Authorization', `Bearer ${token}`)
         };
       }
     });
