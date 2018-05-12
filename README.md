@@ -49,4 +49,4 @@ The app makes graphQL queries via [Apollo](https://www.apollographql.com/). The 
 
 ## Conclusion
 
-This was a fun excercise for me as it was the first time I got exposure to using the graphQL. I really like how you can request specific data and only that will be returned - it also seemed very fast. Apollo was an interesting interface, but sometimes it's documentation for Angular was difficult to follow. I would definitely like to explore other graphQL interfaces in the future.
+This was a fun excercise for me as it was the first time I got exposure to using graphQL. I really like how you can request specific data - it also seemed very fast. Apollo was an interesting interface, but sometimes it's documentation for Angular was difficult to follow. The examples also had all requests being made at the component level; I'm used to making reuqests at an extracted service level. I would definitely like to explore other graphQL interfaces in the future.
