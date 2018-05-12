@@ -18,8 +18,8 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { NavComponent } from './shared/nav/nav.component';
 import { MarketplaceComponent } from './marketplace/marketplace.component';
-import { FilterComponent } from './filter/filter.component';
-import { ListingComponent } from './listing/listing.component';
+import { FilterComponent } from './marketplace/filter/filter.component';
+import { ListingComponent } from './marketplace/listing/listing.component';
 
 const appRoutes: Routes = [
   {
