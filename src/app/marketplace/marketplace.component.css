@@ -24,6 +24,14 @@
     justify-content: center;
 }
 .card{
-    width: 250px;
+    width: 200px;
     margin: 1em;
+    transition: transform .20s ease-in-out;
+}
+.card:hover{
+    transform: scale3d(1.006, 1.006, 1);
+}
+
+.badge-pill{
+    margin-right: 5px;
 }
