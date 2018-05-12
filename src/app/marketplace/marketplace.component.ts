@@ -22,6 +22,10 @@ const listings = gql `
           name
           description
         }
+        secondaryCategory {
+          name
+          description
+        }
       }
     }
   }
@@ -37,7 +41,9 @@ export class MarketplaceComponent implements OnInit, OnDestroy {
   private feedRef: QueryRef<any>;
   private feedSub: Subscription;
 
+  private filterCategories = [];
   private listings = [];
+  private filteredListings = [];
   private pageInfo: any;
 
   constructor(private apollo: Apollo) { }
@@ -59,7 +65,7 @@ export class MarketplaceComponent implements OnInit, OnDestroy {
         // this.loading = loading;
         this.pageInfo = data.marketplaceListings.pageInfo;
         this.listings = data.marketplaceListings.nodes;
-        // this.listings = this.listings.concat(data.marketplaceListings.nodes);
+        this.filter(this.filterCategories);
       });
   }
 
@@ -83,6 +89,27 @@ export class MarketplaceComponent implements OnInit, OnDestroy {
         return fetchMoreResult;
       }
     });
+  }
+
+  filter(categories) {
+    this.filterCategories = categories;
+    if ( categories && categories.length > 0) {
+      this.filteredListings = this.listings.filter(listing => {
+        return categories.find(category => {
+          if (listing.secondaryCategory) {
+            return ([listing.primaryCategory.name, listing.secondaryCategory.name].indexOf(category.name) > -1);
+          } else {
+            return listing.primaryCategory.name === category.name;
+          }
+        });
+      });
+    } else {
+      this.filteredListings = this.listings;
+    }
+    console.log(this.filteredListings);
+    if (this.filteredListings.length < 20 && this.pageInfo.hasNextPage) {
+      this.loeadMore();
+    }
   }
 
   ngOnDestroy() {

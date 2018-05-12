@@ -1,15 +1,19 @@
 <div class="page">
     <div class="left">
-      <app-filter></app-filter>
+      <app-filter (filterChange)="filter($event)"></app-filter>
     </div>
     <div class="center">
       <div class="listings-container">
-          <div *ngFor="let listing of listings" class="card">
+          <div *ngFor="let listing of filteredListings" class="card">
               <img class="card-img-top" [src]="listing.logoUrl" [alt]="listing.name" [style.background-color]="'#'+listing.logoBackgroundColor">
               <div class="card-body">
                 <h4 class="card-title">{{listing.name}}</h4>
                 <p class="card-text">{{listing.normalizedShortDescription}}</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+              </div>
+              <div class="card-footer">
+                <span class="badge badge-pill badge-primary">{{listing.primaryCategory.name}}</span>
+                <span *ngIf="listing.secondaryCategory" class="badge badge-pill badge-secondary">{{listing.secondaryCategory.name}}</span>
               </div>
             </div>
       </div>
