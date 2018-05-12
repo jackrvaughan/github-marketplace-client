@@ -1,13 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Apollo, QueryRef } from 'apollo-angular';
 import gql from 'graphql-tag';
 
 import { Subscription } from 'rxjs';
 
-const listings = gql `
+const categoriesQuery = gql `
   query {
     marketplaceCategories(excludeEmpty:true) {
       name
+      primaryListingCount
+      secondaryListingCount
     }
   }
 `;
@@ -19,17 +21,19 @@ const listings = gql `
 })
 export class FilterComponent implements OnInit {
 
+  @Output() filterChange: EventEmitter<any> = new EventEmitter<any>();
+
   private feedRef: QueryRef<any>;
   private feedSub: Subscription;
 
   private categories = [];
-  private allSelected = true;
+  private allSelected = false;
 
   constructor(private apollo: Apollo) { }
 
   ngOnInit() {
     this.feedRef = this.apollo.watchQuery<any>({
-      query: listings
+      query: categoriesQuery
     });
 
     this.feedSub = this.feedRef
@@ -38,7 +42,7 @@ export class FilterComponent implements OnInit {
         console.log(data);
         this.categories = data.marketplaceCategories.map(item => {
           // set selected for all to true
-          return Object.assign({}, item, {selected: true});
+          return Object.assign({}, item, {selected: false});
         });
       });
   }
@@ -58,7 +62,8 @@ export class FilterComponent implements OnInit {
   }
 
   filter() {
-    console.log(this.categories);
+    const categoryFilters = this.categories.filter(category => category.selected);
+    this.filterChange.emit(categoryFilters);
   }
 
 }
