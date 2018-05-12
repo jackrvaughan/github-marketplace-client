@@ -4,6 +4,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
+// env
+import { environment } from '../environments/environment';
+
 // third party modules
 import { ApolloModule, Apollo } from 'apollo-angular';
 import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
@@ -66,22 +69,12 @@ export class AppModule {
   ) {
     const http = httpLink.create({uri: 'https://api.github.com/graphql'});
     const auth = setContext((_, { headers }) => {
-      // get the authentication token from local storage if it exists
-      // const token = localStorage.getItem('token');
-      const token = '571e78406e08a4c0866c686a1862df729b195d83';
-      // return the headers to the context so httpLink can read them
-      // in this example we assume headers property exists
-      // and it is an instance of HttpHeaders
-      if (!token) {
-        return {};
-      } else {
-        return {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-          // headers: headers.append('Authorization', `Bearer ${token}`)
-        };
-      }
+      return {
+        headers: {
+          Authorization: `Bearer ${environment.token}`
+        }
+        // headers: headers.append('Authorization', `Bearer ${token}`)
+      };
     });
 
     apollo.create({
