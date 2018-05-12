@@ -15,9 +15,6 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { NavComponent } from './shared/nav/nav.component';
 import { MarketplaceComponent } from './marketplace/marketplace.component';
-
-// services
-import { GithubService } from './services/github.service';
 import { FilterComponent } from './filter/filter.component';
 
 const appRoutes: Routes = [
@@ -52,9 +49,7 @@ const appRoutes: Routes = [
     ApolloModule,
     HttpLinkModule
   ],
-  providers: [
-    GithubService
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {
