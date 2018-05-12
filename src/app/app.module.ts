@@ -16,14 +16,12 @@ import { HomeComponent } from './home/home.component';
 import { NavComponent } from './shared/nav/nav.component';
 import { MarketplaceComponent } from './marketplace/marketplace.component';
 import { FilterComponent } from './filter/filter.component';
+import { ListingComponent } from './listing/listing.component';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
-  {
-    path: 'marketplace',
-    component: MarketplaceComponent
-  },
-  // { path: 'app/:id', component: ShowcaseComponent },
+  { path: 'marketplace', component: MarketplaceComponent },
+  { path: 'app/:id', component: ListingComponent },
   { path: '',
     redirectTo: '/home',
     pathMatch: 'full'
@@ -37,7 +35,8 @@ const appRoutes: Routes = [
     HomeComponent,
     NavComponent,
     MarketplaceComponent,
-    FilterComponent
+    FilterComponent,
+    ListingComponent
   ],
   imports: [
     BrowserModule,

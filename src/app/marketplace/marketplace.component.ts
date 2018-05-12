@@ -12,7 +12,7 @@ const listings = gql `
         hasNextPage
       }
       nodes {
-        id
+        slug
         name
         logoUrl
         logoBackgroundColor
