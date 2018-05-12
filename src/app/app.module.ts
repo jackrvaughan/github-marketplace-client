@@ -19,14 +19,22 @@ import { FilterComponent } from './filter/filter.component';
 import { ListingComponent } from './listing/listing.component';
 
 const appRoutes: Routes = [
-  { path: 'home', component: HomeComponent },
-  { path: 'marketplace', component: MarketplaceComponent },
-  { path: 'app/:id', component: ListingComponent },
+  {
+    path: 'home',
+    component: HomeComponent
+  },
+  {
+    path: 'marketplace',
+    component: MarketplaceComponent
+  },
+  {
+    path: 'marketplace/app/:slug',
+    component: ListingComponent,
+  },
   { path: '',
     redirectTo: '/home',
     pathMatch: 'full'
-  },
-  // { path: '**', component: PageNotFoundComponent }
+  }
 ];
 
 @NgModule({
