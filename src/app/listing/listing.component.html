@@ -1,3 +1,64 @@
-<p>
-  listing works!
-</p>
+<div class="container" *ngIf="listing">
+  <img [src]="listing.logoUrl" class="img-thumbnail rounded float-left" alt="{{listing.name}}">
+  <div class="top-right">
+    <h1>{{listing.name}}</h1>
+    <p class="lead">{{listing.fullDescription}}</p>
+  </div>
+
+  <dl class="categories row">
+    <dt class="col-sm-3">
+      <h5><span class="badge badge-primary">{{listing.primaryCategory.name}}</span></h5>
+    </dt>
+    <dd class="col-sm-9">{{listing.primaryCategory.description}}</dd>
+    <dt *ngIf="listing.secondaryCategory" class="col-sm-3">
+      <h5><span class="badge badge-secondary">{{listing.secondaryCategory.name}}</span></h5>
+    </dt>
+    <dd *ngIf="listing.secondaryCategory" class="col-sm-9">{{listing.secondaryCategory.description}}</dd>
+  </dl>
+
+  <!-- <ul class="categories list-group">
+    <li class="list-group-item">
+      <span class="badge badge-primary">{{listing.primaryCategory.name}}</span>
+      {{listing.primaryCategory.description}}
+    </li>
+    <li *ngIf="listing.secondaryCategory" class="list-group-item">
+      <span class="badge badge-secondary">{{listing.secondaryCategory.name}}</span>
+      {{listing.secondaryCategory.description}}
+    </li>
+  </ul> -->
+  <div class="main">
+    <span [innerHtml]="listing.extendedDescriptionHTML"></span>
+
+    <!-- <div id="carousel" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active" *ngFor="let screenshot of listing.screenshotUrls">
+          <img class="d-block w-100" [src]="screenshot" alt="First slide">
+        </div>
+      </div>
+    </div> -->
+
+    <div class="screenshots">
+      <!-- <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+        <div class="btn-group btn-group-sm" role="group" aria-label="First group">
+          <button (click)="setScreenshot(screenshot)" *ngFor="let screenshot of listing.screenshotUrls; let i = index" type="button" class="btn btn-secondary">{{i+1}}</button>
+        </div>
+      </div> -->
+      <img class="mini-screenshot" *ngFor="let screenshot of listing.screenshotUrls; let first = first; let last = last" [class.first-mini-screenshot]="first" [class.last-mini-screenshot]="last" [src]="screenshot" (click)="setScreenshot(screenshot)" alt="">
+      <img [src]="screenshot" class="screenshot img-fluid">
+    </div>
+
+    <div class="footer">
+      <a href="{{listing.supportUrl}}">Support</a> 
+      <a href="{{listing.termsOfServiceUrl}}">Terms of Service</a>
+    </div>
+  </div>
+</div>
+
+<!-- {{listing}} -->
+
+<!--
+logoBackgroundColor
+screenshotUrls
+supportUrl
+termsOfServiceUrl -->
+
