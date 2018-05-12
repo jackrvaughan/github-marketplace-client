@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Apollo, QueryRef } from 'apollo-angular';
 import gql from 'graphql-tag';
 
@@ -9,7 +10,7 @@ const listingQuery = gql `
     marketplaceListing(slug: $slug) {
       name
       fullDescription
-      extendedDescription
+      extendedDescriptionHTML
       logoBackgroundColor
       logoUrl
       primaryCategory {
@@ -34,27 +35,45 @@ const listingQuery = gql `
 })
 export class ListingComponent implements OnInit, OnDestroy {
 
+  private routerSub: Subscription;
+
   private feedRef: QueryRef<any>;
   private feedSub: Subscription;
 
-  constructor(private apollo: Apollo) { }
+  private listing: object;
+  private screenshot: string;
+
+  constructor(
+    private route: ActivatedRoute,
+    private apollo: Apollo
+  ) { }
 
   ngOnInit() {
-    this.feedRef = this.apollo.watchQuery<any>({
-      query: listingQuery,
-      variables: {
-        slug: 'codecov'
-      },
-    });
+    this.routerSub = this.route.params.subscribe(params => {
+      const slug = params['slug'];
 
-    this.feedSub = this.feedRef
-      .valueChanges
-      .subscribe(({ data, loading }) => {
-        console.log(data);
+      this.feedRef = this.apollo.watchQuery<any>({
+        query: listingQuery,
+        variables: {
+          slug: slug
+        },
       });
+      this.feedSub = this.feedRef
+        .valueChanges
+        .subscribe(({ data, loading }) => {
+          console.log(data);
+          this.listing = data.marketplaceListing;
+          this.screenshot = data.marketplaceListing.screenshotUrls[0];
+        });
+   });
+  }
+
+  setScreenshot(screenshot) {
+    this.screenshot = screenshot;
   }
 
   ngOnDestroy() {
+    this.routerSub.unsubscribe();
     this.feedSub.unsubscribe();
   }
 
