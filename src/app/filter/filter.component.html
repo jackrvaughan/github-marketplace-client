@@ -5,19 +5,20 @@
   <div class="card-body">
     <h5 class="card-title">
       Categories
-      <button (click)="allSelectedToggle()" type="button" class="btn btn-outline-secondary btn-sm">Select All</button>
+      <button (click)="allSelectedToggle()" type="button" class="btn btn-outline-secondary btn-sm">
+        <span *ngIf="allSelected">Clear All</span>
+        <span *ngIf="!allSelected">Select All</span>
+      </button>
     </h5>
     <ul class="list-group list-group-flush">
-        <label *ngFor="let category of categories" class="form-check-label">
-            <input [(ngModel)]="category.selected" type="checkbox" class="form-check-input">
-            {{category.name}}
-          </label>
-        <!-- <li *ngFor="let category of categories" class="list-group-item">
-            <label class="form-check-label">
-              <input [(ngModel)]="category.selected" type="checkbox" class="form-check-input">
-              {{category.name}}
-            </label>
-        </li> -->
-      </ul>
+      <label *ngFor="let category of categories" class="form-check-label">
+        <input [(ngModel)]="category.selected" (ngModelChange)="filter()" type="checkbox" class="form-check-input">
+        <span class="category-label">
+          {{category.name}}
+          <span class="badge badge-light">{{category.primaryListingCount + category.secondaryListingCount}}</span>
+        </span>
+        <!-- <span class="badge badge-secondary">Secondary</span> -->
+      </label>
+    </ul>
   </div>
 </div>

@@ -2,3 +2,9 @@
     display: flex;
     justify-content: space-between;
 }
+
+.category-label{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
