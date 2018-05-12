@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 // third party modules
 import { ApolloModule, Apollo } from 'apollo-angular';
@@ -17,6 +18,7 @@ import { MarketplaceComponent } from './marketplace/marketplace.component';
 
 // services
 import { GithubService } from './services/github.service';
+import { FilterComponent } from './filter/filter.component';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -37,10 +39,12 @@ const appRoutes: Routes = [
     AppComponent,
     HomeComponent,
     NavComponent,
-    MarketplaceComponent
+    MarketplaceComponent,
+    FilterComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     RouterModule.forRoot(
       appRoutes
     ),

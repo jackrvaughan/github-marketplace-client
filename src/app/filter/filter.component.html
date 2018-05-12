@@ -1,0 +1,23 @@
+<div class="card">
+  <div class="card-header">
+    Filter
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">
+      Categories
+      <button (click)="allSelectedToggle()" type="button" class="btn btn-outline-secondary btn-sm">Select All</button>
+    </h5>
+    <ul class="list-group list-group-flush">
+        <label *ngFor="let category of categories" class="form-check-label">
+            <input [(ngModel)]="category.selected" type="checkbox" class="form-check-input">
+            {{category.name}}
+          </label>
+        <!-- <li *ngFor="let category of categories" class="list-group-item">
+            <label class="form-check-label">
+              <input [(ngModel)]="category.selected" type="checkbox" class="form-check-input">
+              {{category.name}}
+            </label>
+        </li> -->
+      </ul>
+  </div>
+</div>
