@@ -4,7 +4,7 @@
     </div>
     <div class="center">
       <div class="listings-container">
-          <div *ngFor="let listing of filteredListings" class="card">
+          <div *ngFor="let listing of filteredListings" routerLink="app/{{listing.slug}}" class="card">
               <img class="card-img-top" [src]="listing.logoUrl" [alt]="listing.name" [style.background-color]="'#'+listing.logoBackgroundColor">
               <div class="card-body">
                 <h4 class="card-title">{{listing.name}}</h4>
