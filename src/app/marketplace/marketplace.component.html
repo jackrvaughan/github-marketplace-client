@@ -1,3 +1,18 @@
-<p>
-  marketplace works!
-</p>
+<div class="page">
+    <div class="left">
+      <app-filter></app-filter>
+    </div>
+    <div class="center">
+      <div class="listings-container">
+          <div *ngFor="let listing of listings" class="card">
+              <img class="card-img-top" [src]="listing.logoUrl" [alt]="listing.name" [style.background-color]="'#'+listing.logoBackgroundColor">
+              <div class="card-body">
+                <h4 class="card-title">{{listing.name}}</h4>
+                <p class="card-text">{{listing.normalizedShortDescription}}</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
+      </div>
+      <button *ngIf="pageInfo && pageInfo.hasNextPage" type="button" (click)='loeadMore()' class="btn btn-primary">Load More!</button>
+    </div>
+</div>

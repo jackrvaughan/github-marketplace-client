@@ -1,0 +1,29 @@
+.page{
+    padding: 1em 0;
+    display: grid;
+    grid-template-columns: 20% 70% 10%;
+    grid-template-rows: auto;
+    grid-template-areas: 
+      "left center";
+}
+
+.left{
+    grid-area: left;
+    padding: 1em;
+}
+
+.center{
+    grid-area: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+.listings-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.card{
+    width: 250px;
+    margin: 1em;
+}
