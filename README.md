@@ -2,6 +2,8 @@
 
 A simple web app to explore Github Marketplace apps
 
+![Marketplace Screenshot](assets/marketplace-screenshot.png "Marketplace")
+
 ## Setup
 
 In order to run the app, you must add your own Github Personal Access Token with the Repo scope enabled. You will find an example environment file at `/src/environments/environment.example.ts`:
