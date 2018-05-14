@@ -21,4 +21,32 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 
 ## Architecture
 
-The client app is split into...
+The client app is split into multiple components all delivered via a primary app component.
+
+General directory structure (w/out html, css, or testing files):
+```
+app -->
+  app.module.ts
+  app.component.ts
+  home -->
+    home.component.ts
+  shared -->
+    nav -->
+      nav.component.ts
+  marketplace -->
+    marketplace.component.ts
+      filter -->
+        filter.component.ts
+      listing -->
+        listing.component.ts
+```
+
+The app component houses the nav component along with a router-outlet that serves the home, marketplace, and listing components.
+
+The marketplace component has the filter component as a child component, which delivers filtering updates. The filtering component requests all the marketplace `categories` from github to populate the options.
+
+The app makes graphQL queries via [Apollo](https://www.apollographql.com/). The marketplace component runs an initial query of 20 marketplaces apps. As the user scrolls, they can request more via button - this updates the request and concatenates the results. As filtering is added, new requests are not made, rather filters are applied to the existing store of apps. If less than 20 marketplace apps exist once filtering has been applied, another request will be made (until all marketplace apps have been recieved).
+
+## Conclusion
+
+This was a fun excercise for me as it was the first time I got exposure to using graphQL. I really like how you can request specific data - it also seemed very fast. Apollo was an interesting interface, but sometimes it's documentation for Angular was difficult to follow. The examples also had all requests being made at the component level; I'm used to making reuqests at an extracted service level. I would definitely like to explore other graphQL interfaces in the future.
